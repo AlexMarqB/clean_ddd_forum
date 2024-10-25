@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it} from 'vitest'
+import { AnswersRepository } from '@/domain/repositories/answers-repository';
 import { AnswerQuestionUseCase } from '../answer-question'
-import { Answer } from '../../entities/answer'
-import { AnswersRepository } from '../../repositories/answers-repository'
+import { Answer } from '@/domain/entities/answer';
+
 
 const mockAnswersRepository: AnswersRepository = {
     create: async (answer: Answer) => {

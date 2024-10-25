@@ -1,7 +1,8 @@
 import { Slug } from "./value-objects/slug";
-import { Entity } from "../../core/entities/entity";
-import { UniqueEntityId } from "../../core/entities/unique-entity-id";
-import { Optional } from "../../core/types/optional";
+import { Entity } from "@/core/entities/entity";
+import { UniqueEntityId } from "@/core/entities/unique-entity-id";
+import { Optional } from "@/core/types/optional";
+import dayjs from "dayjs";
 
 interface QuestionProps {
 	authorId: UniqueEntityId;
@@ -14,10 +15,25 @@ interface QuestionProps {
 }
 
 export class Question extends Entity<QuestionProps> {
-	static create(props: Optional<QuestionProps, 'createdAt'>, id?: UniqueEntityId) {
-		const question = new Question({ ...props, createdAt: new Date() }, id);
+	static create(props: Optional<QuestionProps, 'createdAt'  | 'slug'>, id?: UniqueEntityId) {
+		const question = new Question({ ...props, slug: props.slug ?? Slug.createFromText(props.title),createdAt: new Date() }, id);
 		return question;
 	}
+
+	get isNew(): boolean {
+		return dayjs().diff(this.props.createdAt, 'days') <= 7;
+	}
+
+	get excerpt() {
+        return this.content
+        .substring(0, 120)
+        .trimEnd()
+        .concat('...')
+    }
+
+    private touch() {
+        this.props.updatedAt = new Date()
+    }
 
 	get authorId(): UniqueEntityId {
 		return this.props.authorId;
@@ -28,7 +44,8 @@ export class Question extends Entity<QuestionProps> {
 	}
 
 	set bestAnswerId(value: UniqueEntityId | undefined) {
-		this.props.bestAnswerId = value;
+		this.props.bestAnswerId = value
+		this.touch()
 	}
 
 	get title(): string {
@@ -37,14 +54,12 @@ export class Question extends Entity<QuestionProps> {
 
 	set title(value: string) {
 		this.props.title = value;
+		this.props.slug = Slug.createFromText(value);
+		this.touch()
 	}
 
 	get slug(): Slug {
 		return this.props.slug;
-	}
-
-	set slug(value: Slug) {
-		this.props.slug = value;
 	}
 
 	get content(): string {
@@ -53,6 +68,7 @@ export class Question extends Entity<QuestionProps> {
 
 	set content(value: string) {
 		this.props.content = value;
+		this.touch()
 	}
 
 	get createdAt(): Date {
@@ -61,9 +77,5 @@ export class Question extends Entity<QuestionProps> {
 
 	get updatedAt(): Date | undefined {
 		return this.props.updatedAt;
-	}
-
-	set updatedAt(value: Date | undefined) {
-		this.props.updatedAt = value;
 	}
 }
