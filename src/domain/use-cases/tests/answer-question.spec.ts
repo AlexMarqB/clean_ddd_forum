@@ -3,7 +3,6 @@ import { AnswerQuestionUseCase } from '../answer-question'
 import { Answer } from '../../entities/answer'
 import { AnswersRepository } from '../../repositories/answers-repository'
 
-
 const mockAnswersRepository: AnswersRepository = {
     create: async (answer: Answer) => {
         return;
