@@ -18,13 +18,13 @@ describe('Answer Question Use Case Unit Test', async () => {
   })
 
   it('should create an answer', async () => {
-    const answer = await sut.execute({
+    const response = await sut.execute({
       instructorId: 'any_id',
       questionId: 'any_id',
       content: 'any_content',
     })
 
-    expect(answer).toBeInstanceOf(Answer)
-    expect(answer.content).toBe('any_content')
+    expect(response.answer).toBeInstanceOf(Answer)
+    expect(response.answer.content).toBe('any_content')
   })
 })
