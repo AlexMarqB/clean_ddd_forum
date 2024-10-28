@@ -2,9 +2,11 @@ import { AnswersRepository } from '@/domain/repositories/answers-repository'
 import { AnswerQuestionUseCase } from '../answer-question'
 import { Answer } from '@/domain/entities/answer'
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const mockAnswersRepository: AnswersRepository = {
   create: async (answer: Answer) => {},
 }
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 let repository: AnswersRepository
 let sut: AnswerQuestionUseCase
