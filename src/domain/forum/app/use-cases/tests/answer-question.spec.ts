@@ -1,6 +1,7 @@
-import { AnswersRepository } from '@/domain/repositories/answers-repository'
+
+import { AnswersRepository } from '../../repositories/answers-repository'
 import { AnswerQuestionUseCase } from '../answer-question'
-import { Answer } from '@/domain/entities/answer'
+import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const mockAnswersRepository: AnswersRepository = {
