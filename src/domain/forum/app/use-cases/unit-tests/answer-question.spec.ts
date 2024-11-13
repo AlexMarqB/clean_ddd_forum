@@ -1,19 +1,12 @@
-
-import { AnswersRepository } from '../../repositories/answers-repository'
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { AnswerQuestionUseCase } from '../answer-question'
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const mockAnswersRepository: AnswersRepository = {
-  create: async (answer: Answer) => {},
-}
-/* eslint-enable @typescript-eslint/no-unused-vars */
-
-let repository: AnswersRepository
+let repository: InMemoryAnswersRepository
 let sut: AnswerQuestionUseCase
 describe('Answer Question Use Case Unit Test', async () => {
-  beforeEach(async () => {
-    repository = mockAnswersRepository
+  beforeEach(() => {
+    repository = new InMemoryAnswersRepository()
     sut = new AnswerQuestionUseCase(repository)
   })
 
