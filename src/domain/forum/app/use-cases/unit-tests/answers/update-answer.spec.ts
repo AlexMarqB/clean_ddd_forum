@@ -1,6 +1,6 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
-import { UpdateAnswer } from '../update-answer'
+import { UpdateAnswer } from '../../answers/update-answer'
 
 let repository: InMemoryAnswersRepository
 let sut: UpdateAnswer

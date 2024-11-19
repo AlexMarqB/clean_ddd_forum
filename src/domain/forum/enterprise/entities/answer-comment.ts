@@ -14,4 +14,8 @@ export class AnswerComment extends Comment<AnswerCommentProps> {
     const answer = new AnswerComment({ ...props, createdAt: new Date() }, id)
     return answer
   }
+
+  get answerId() {
+    return this.props.answerId
+  }
 }

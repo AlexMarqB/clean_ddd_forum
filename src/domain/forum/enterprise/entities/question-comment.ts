@@ -14,4 +14,8 @@ export class QuestionComment extends Comment<QuestionCommentProps> {
     const question = new QuestionComment({ ...props, createdAt: new Date() }, id)
     return question
   }
+
+  get questionId() {
+    return this.props.questionId
+  }
 }

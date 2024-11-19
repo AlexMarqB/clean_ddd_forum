@@ -1,5 +1,5 @@
-import { AnswersRepository } from "../repositories/answers-repository"
-import { QuestionsRepository } from "../repositories/questions-repository"
+import { AnswersRepository } from "../../repositories/answers-repository"
+import { QuestionsRepository } from "../../repositories/questions-repository"
 
 interface DeleteAnswerRequest {
     authorId: string

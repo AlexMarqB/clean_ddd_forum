@@ -1,5 +1,6 @@
-import { Answer } from "../../enterprise/entities/answer"
-import { AnswersRepository } from "../repositories/answers-repository"
+import { Answer } from "@/domain/forum/enterprise/entities/answer"
+import { AnswersRepository } from "../../repositories/answers-repository"
+
 
 interface ListQuestionAnswersRequest {
     questionId: string

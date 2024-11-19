@@ -1,9 +1,8 @@
 import { Question } from '@/domain/forum/enterprise/entities/question'
-import { QuestionsRepository } from '../../repositories/questions-repository'
-import { GetQuestionBySlug } from '../get-question-by-slug'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
+import { GetQuestionBySlug } from '../../questions/get-question-by-slug'
 
 let repository: InMemoryQuestionsRepository
 let sut: GetQuestionBySlug

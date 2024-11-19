@@ -1,7 +1,7 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
-import { ListQuestionAnswers } from '../list-question-answers'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { ListQuestionAnswers } from '../../questions/list-question-answers'
 
 let repository: InMemoryAnswersRepository
 let sut: ListQuestionAnswers

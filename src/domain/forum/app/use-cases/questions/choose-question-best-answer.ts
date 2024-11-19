@@ -1,6 +1,7 @@
-import { Question } from "../../enterprise/entities/question";
-import { AnswersRepository } from "../repositories/answers-repository";
-import { QuestionsRepository } from "../repositories/questions-repository";
+import { Question } from "@/domain/forum/enterprise/entities/question"
+import { QuestionsRepository } from "../../repositories/questions-repository"
+import { AnswersRepository } from "../../repositories/answers-repository"
+
 
 interface ChooseQuestionBestAnswerRequest {
     answerId: string

@@ -3,7 +3,7 @@ import { Entity } from "@/core/entities/entity";
 export interface CommentProps {
     authorId: string
     content: string
-    createdAt: Date
+    createdAt?: Date
     updatedAt?: Date
 }
 

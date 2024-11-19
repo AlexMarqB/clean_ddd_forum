@@ -1,6 +1,6 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
-import { DeleteQuestion } from '../delete-question'
+import { DeleteQuestion } from '../../questions/delete-question'
 
 let repository: InMemoryQuestionsRepository
 let sut: DeleteQuestion

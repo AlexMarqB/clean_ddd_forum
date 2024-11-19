@@ -1,9 +1,8 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { Question } from '@/domain/forum/enterprise/entities/question'
+import { QuestionsRepository } from '../../repositories/questions-repository'
 
-import { AnswersRepository } from '../repositories/answers-repository'
-import { Answer } from '../../enterprise/entities/answer'
-import { QuestionsRepository } from '../repositories/questions-repository'
-import { Question } from '../../enterprise/entities/question'
+
 
 interface CreateQuestionUseCaseRequest {
     authorId: string

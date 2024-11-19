@@ -1,9 +1,9 @@
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
-import { DeleteAnswer } from '../delete-answer'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { makeQuestion } from 'test/factories/make-question'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
+import { DeleteAnswer } from '../../answers/delete-answer'
 
 let repository: InMemoryAnswersRepository
 let questionRepository: InMemoryQuestionsRepository
