@@ -1,8 +1,6 @@
 import { AnswerComment } from "../../enterprise/entities/answer-comment";
+import { CommentRepository } from "./interfaces/comment-repository";
 
-export interface AnswerCommentsRepository {
-    create(comment: AnswerComment): Promise<void>
-    findById(id: string): Promise<AnswerComment | null>
+export interface AnswerCommentsRepository extends CommentRepository<AnswerComment> {
     findManyByAnswerId(answerId: string): Promise<AnswerComment[]>
-    save(comment: AnswerComment): Promise<void>
 }
