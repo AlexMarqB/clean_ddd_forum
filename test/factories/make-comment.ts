@@ -5,12 +5,11 @@ import { faker } from '@faker-js/faker'
 
 export function makeAnswerComment(
     overrides: Partial<AnswerComment> = {},
-    answerId?: UniqueEntityId,
     id?: UniqueEntityId,
 ): AnswerComment {
     const props: AnswerCommentProps = {
         authorId: overrides.authorId ?? 'default-author-id',
-        answerId: answerId ?? new UniqueEntityId('default-answer-id'),
+        answerId: overrides.answerId ?? new UniqueEntityId('default-answer-id'),
         content: faker.lorem.text(),
         ...overrides,
     }
@@ -19,12 +18,11 @@ export function makeAnswerComment(
 
 export function makeQuestionComment(
     overrides: Partial<QuestionComment> = {},
-    questionId?: UniqueEntityId,
     id?: UniqueEntityId,
 ): QuestionComment {
     const props: QuestionCommentProps = {
         authorId: overrides.authorId ?? 'default-author-id',
-        questionId: questionId ?? new UniqueEntityId('default-question-id'),
+        questionId: overrides.questionId ?? new UniqueEntityId('default-question-id'),
         content: faker.lorem.text(),
         ...overrides,
     }

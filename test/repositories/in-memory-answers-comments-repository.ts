@@ -2,14 +2,14 @@ import { AnswerCommentsRepository } from "@/domain/forum/app/repositories/answer
 import { AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment";
 
 export class InMemoryAnswerCommentRepository implements AnswerCommentsRepository {
+    private items: AnswerComment[] = [];
 
     async create(comment: AnswerComment): Promise<void> {
         this.items.push(comment);
     }
-    findManyByAnswerId(answerId: string): Promise<AnswerComment[]> {
-        throw new Error("Method not implemented.");
+    async findManyByAnswerId(answerId: string): Promise<AnswerComment[]> {
+        return this.items.filter(item => item.answerId.toString() === answerId);
     }
-    private items: AnswerComment[] = [];
 
     async findById(id: string): Promise<AnswerComment | null> {
         const comment = this.items.find(item => item.id.toString() === id);

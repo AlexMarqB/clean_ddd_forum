@@ -1,15 +1,17 @@
+import { UniqueEntityId } from "@/core/entities/unique-entity-id";
 import { QuestionCommentsRepository } from "@/domain/forum/app/repositories/question-comments-repository";
 import { QuestionComment } from "@/domain/forum/enterprise/entities/question-comment";
 
 export class InMemoryQuestionCommentRepository implements QuestionCommentsRepository {
+    private items: QuestionComment[] = [];
 
     async create(comment: QuestionComment): Promise<void> {
         this.items.push(comment);
     }
-    findManyByQuestionId(questionId: string): Promise<QuestionComment[]> {
-        throw new Error("Method not implemented.");
+
+    async findManyByQuestionId(questionId: string): Promise<QuestionComment[]> {
+        return this.items.filter(item => item.questionId.toString() === questionId);
     }
-    private items: QuestionComment[] = [];
 
     async findById(id: string): Promise<QuestionComment | null> {
         const comment = this.items.find(item => item.id.toString() === id);
