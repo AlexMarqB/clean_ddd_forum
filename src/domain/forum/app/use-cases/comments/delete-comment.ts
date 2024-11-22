@@ -1,3 +1,4 @@
+import { Either, left, right } from "@/core/either";
 import { AnswerCommentsRepository } from "../../repositories/answer-comments-repository";
 import { QuestionCommentsRepository } from "../../repositories/question-comments-repository";
 
@@ -6,20 +7,24 @@ interface DeleteCommentRequest {
     commentId: string
 }
 
+type DeleteCommentResponse = Either<string, {}>
+
 export class DeleteComment {
     constructor(private repository: QuestionCommentsRepository | AnswerCommentsRepository) {}
 
-    async execute({authorId, commentId}: DeleteCommentRequest): Promise<void> {
+    async execute({authorId, commentId}: DeleteCommentRequest): Promise<DeleteCommentResponse> {
         const comment = await this.repository.findById(commentId)
 
         if (!comment) {
-            throw new Error('Comment not found')
+            return left('Comment not found')
         }
 
         if(comment.authorId.toString() !== authorId) {
-            throw new Error('You are not allowed to delete this comment')
+            return left('Not authorized')
         }
 
         await this.repository.delete(comment)
+
+        return right({})
     }
 }

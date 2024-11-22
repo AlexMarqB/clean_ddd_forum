@@ -1,5 +1,6 @@
 import { Question } from "@/domain/forum/enterprise/entities/question"
 import { QuestionsRepository } from "../../repositories/questions-repository"
+import { Either, right } from "@/core/either"
 
 
 interface ListRecentQuestionRequest {
@@ -7,9 +8,9 @@ interface ListRecentQuestionRequest {
     perPage?: number
 }
 
-interface ListRecentQuestionResponse {
+type ListRecentQuestionResponse = Either<string, {
     questions: Question[]
-}
+}>
 
 
 export class ListRecentQuestions {
@@ -18,6 +19,6 @@ export class ListRecentQuestions {
     async execute({page, perPage}: ListRecentQuestionRequest): Promise<ListRecentQuestionResponse> {
         const questions = await this.repository.findManyRecent({page, perPage: perPage ?? 10})
 
-        return {questions}
+        return right({questions})
     }
 }

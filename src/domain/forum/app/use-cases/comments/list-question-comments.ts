@@ -1,4 +1,4 @@
-import { QuestionComment } from "@/domain/forum/enterprise/entities/question-comment";
+import { QuestionComment } from "@/domain/forum/enterprise/entities/comment-objects/question-comment";
 import { QuestionCommentsRepository } from "../../repositories/question-comments-repository";
 
 interface ListQuestionCommentsResponse {

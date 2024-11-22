@@ -1,3 +1,4 @@
+import { Either, left, right } from "@/core/either"
 import { QuestionsRepository } from "../../repositories/questions-repository"
 
 interface UpdateQuestionRequest {
@@ -7,6 +8,7 @@ interface UpdateQuestionRequest {
     content: string
 }
 
+type UpdateQuestionResponse = Either<string, {}>
 
 export class UpdateQuestion {
     constructor(private repository: QuestionsRepository) {}
@@ -16,15 +18,15 @@ export class UpdateQuestion {
         authorId,
         title,
         content
-    }: UpdateQuestionRequest) {
+    }: UpdateQuestionRequest): Promise<UpdateQuestionResponse> {
         const question = await this.repository.findById(questionId)
 
         if (!question) {
-            throw new Error('Question not found')
+            return left('Question not found')
         }
 
         if(authorId !== question.authorId.toString()) {
-            throw new Error('Not allowed')
+            return left('Not allowed')
         }
 
         question.title = title
@@ -32,6 +34,6 @@ export class UpdateQuestion {
 
         await this.repository.save(question)
 
-        return {}
+        return right({})
     }
 }

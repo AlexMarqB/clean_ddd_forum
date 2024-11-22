@@ -1,3 +1,4 @@
+import { Either, left, right } from "@/core/either"
 import { QuestionsRepository } from "../../repositories/questions-repository"
 
 interface DeleteQuestionRequest {
@@ -5,7 +6,7 @@ interface DeleteQuestionRequest {
     questionId: string
 }
 
-interface DeleteQuestionResponse {}
+type DeleteQuestionResponse = Either<string, {}>
 
 export class DeleteQuestion {
     constructor(private repository: QuestionsRepository) {}
@@ -14,15 +15,15 @@ export class DeleteQuestion {
         const question = await this.repository.findById(questionId)
 
         if (!question) {
-            throw new Error('Question not found')
+            return left('Question not found')
         }
 
         if(authorId !== question.authorId.toString()) {
-            throw new Error('Not allowed')
+            return left('Not allowed')
         }
 
         await this.repository.delete(question)
 
-        return {}
+        return right({})
     }
 }

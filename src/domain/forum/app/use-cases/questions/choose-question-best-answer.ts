@@ -1,6 +1,7 @@
 import { Question } from "@/domain/forum/enterprise/entities/question"
 import { QuestionsRepository } from "../../repositories/questions-repository"
 import { AnswersRepository } from "../../repositories/answers-repository"
+import { Either, left, right } from "@/core/either"
 
 
 interface ChooseQuestionBestAnswerRequest {
@@ -8,9 +9,9 @@ interface ChooseQuestionBestAnswerRequest {
     authorId: string
 }
 
-interface ChooseQuestionBestAnswerResponse {
+type ChooseQuestionBestAnswerResponse = Either<string, {
     question: Question
-}
+}>
 
 export class ChooseQuestionBestAnswer {
     constructor(private questionsRepository: QuestionsRepository, private asnwersRespository: AnswersRepository) {}
@@ -22,25 +23,25 @@ export class ChooseQuestionBestAnswer {
         const answer = await this.asnwersRespository.findById(answerId)
 
         if (!answer) {
-            throw new Error('Answer not found')
+            return left('Answer not found')
         }
         
         const question = await this.questionsRepository.findById(answer.questionId.toString())
         
         if (!question) {
-            throw new Error('Question not found')
+            return left('Question not found')
         }
         
         if(authorId !== answer.authorId.toString()) {
-            throw new Error('Not allowed')
+            return left('Not allowed')
         }
 
         question.bestAnswerId = answer.id
 
         await this.questionsRepository.save(question)
 
-        return {
+        return right({
             question
-        }
+        })
     }
 }
