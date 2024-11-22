@@ -1,5 +1,5 @@
 import { AnswerCommentsRepository } from "@/domain/forum/app/repositories/answer-comments-repository";
-import { AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment";
+import { AnswerComment } from "@/domain/forum/enterprise/entities/comment-objects/answer-comment";
 
 export class InMemoryAnswerCommentRepository implements AnswerCommentsRepository {
     private items: AnswerComment[] = [];
@@ -25,7 +25,7 @@ export class InMemoryAnswerCommentRepository implements AnswerCommentsRepository
         }
     }
 
-    async delete(id: string): Promise<void> {
-        this.items = this.items.filter(item => item.id.toString() !== id);
+    async delete(comment: AnswerComment): Promise<void> {
+        this.items = this.items.filter(item => item.id !== comment.id);
     }
 }

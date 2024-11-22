@@ -1,6 +1,6 @@
 import { UniqueEntityId } from "@/core/entities/unique-entity-id";
 import { QuestionCommentsRepository } from "@/domain/forum/app/repositories/question-comments-repository";
-import { QuestionComment } from "@/domain/forum/enterprise/entities/question-comment";
+import { QuestionComment } from "@/domain/forum/enterprise/entities/comment-objects/question-comment";
 
 export class InMemoryQuestionCommentRepository implements QuestionCommentsRepository {
     private items: QuestionComment[] = [];
@@ -27,7 +27,7 @@ export class InMemoryQuestionCommentRepository implements QuestionCommentsReposi
         }
     }
 
-    async delete(id: string): Promise<void> {
-        this.items = this.items.filter(item => item.id.toString() !== id);
+    async delete(comment: QuestionComment): Promise<void> {
+        this.items = this.items.filter(item => item.id !== comment.id);
     }
 }
